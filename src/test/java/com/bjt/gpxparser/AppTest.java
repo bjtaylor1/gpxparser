@@ -37,6 +37,22 @@ public class AppTest extends TestCase
         final GpxParser gpxparser = new GpxParser();
         final Gpx plainsGpx = gpxparser.parseGpx(inputStream);
         assertEquals(7, plainsGpx.getTracks().size());
+
+        for(final Track track : plainsGpx.getTracks()) {
+
+            assertTrue(track.getTrackSegments().size() > 0);
+
+            for(final TrackSegment trackSegment : track.getTrackSegments()) {
+
+                assertTrue(trackSegment.getTrackPoints().size() > 0);
+                for (final TrackPoint trackPoint : trackSegment.getTrackPoints()) {
+                    assertTrue(trackPoint.getLat() > 49);
+                    assertTrue(trackPoint.getLat() < 55);
+                    assertTrue(trackPoint.getLon() < -1);
+                    assertTrue(trackPoint.getLon() > -4);
+                }
+            }
+        }
         assertTrue(true);
     }
 
