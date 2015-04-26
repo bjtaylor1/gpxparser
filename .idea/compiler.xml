@@ -26,5 +26,8 @@
         <module name="gpxparser" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gpxparser" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

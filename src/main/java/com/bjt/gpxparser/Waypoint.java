@@ -8,15 +8,15 @@ import org.simpleframework.xml.Root;
  * Created by Ben.Taylor on 16/04/2015.
  */
 @Root(strict = false)
-public class TrackPoint {
+public class Waypoint {
     @Attribute
-    private double  lat;
+    private double lat;
 
     @Attribute
     private double lon;
 
-    @Element(name = "time", required = false)
-    private String time;
+    @Element(required = false)
+    private String name;
 
     public double getLat() {
         return lat;
@@ -26,7 +26,7 @@ public class TrackPoint {
         return lon;
     }
 
-    public String getTime() {
-        return time;
+    public String getName() {
+        return name;
     }
 }

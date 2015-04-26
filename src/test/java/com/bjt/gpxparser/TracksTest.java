@@ -4,19 +4,20 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest extends TestCase
+public class TracksTest extends TestCase
 {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public TracksTest(String testName)
     {
         super(testName);
     }
@@ -26,7 +27,7 @@ public class AppTest extends TestCase
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( TracksTest.class );
     }
 
     /**
@@ -40,6 +41,8 @@ public class AppTest extends TestCase
 
         for(final Track track : plainsGpx.getTracks()) {
 
+            assertFalse(track.getName() == null || track.getName().isEmpty());
+            System.out.println(track.getName());
             assertTrue(track.getTrackSegments().size() > 0);
 
             for(final TrackSegment trackSegment : track.getTrackSegments()) {
@@ -53,7 +56,6 @@ public class AppTest extends TestCase
                 }
             }
         }
-        assertTrue(true);
     }
 
     public void testSimple() throws Exception {
@@ -63,5 +65,23 @@ public class AppTest extends TestCase
         final Gpx simpleGpx = gpxparser.parseGpx(inputStream);
 
         assertEquals(2, simpleGpx.getTracks().size());
+    }
+
+    public void testParseTrackFromJson() throws IOException {
+        final InputStream jsonStream = getClass().getResourceAsStream("/trackpoints.json");
+        final GpxParser gpxParser = new GpxParser();
+        final TrackPoint[] trackPoints = gpxParser.parseTrackpointsFromJson(jsonStream);
+
+        assertEquals(3, trackPoints.length);
+
+        assertEquals(53.1, trackPoints[0].getLat());
+        assertEquals(-0.2, trackPoints[0].getLon());
+
+        assertEquals(53.2, trackPoints[1].getLat());
+        assertEquals(-0.3, trackPoints[1].getLon());
+
+        assertEquals(53.3, trackPoints[2].getLat());
+        assertEquals(-0.4, trackPoints[2].getLon());
+
     }
 }
