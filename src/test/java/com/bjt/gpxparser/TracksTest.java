@@ -6,6 +6,9 @@ import junit.framework.TestSuite;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Unit test for simple App.
@@ -83,5 +86,16 @@ public class TracksTest extends TestCase
         assertEquals(53.3, trackPoints[2].getLat());
         assertEquals(-0.4, trackPoints[2].getLon());
 
+    }
+
+    public void testParseTrackToJson() {
+        final List<TrackPoint> trackPoints = new ArrayList<TrackPoint>();
+        trackPoints.add(new TrackPoint(53.1, -2.1));
+        trackPoints.add(new TrackPoint(53.2, -2.2));
+        final GpxParser gpxParser = new GpxParser();
+        final StringWriter stringWriter = new StringWriter();
+        gpxParser.toJson(trackPoints, stringWriter);
+        final String jsonString = stringWriter.toString();
+        assertEquals("[{\"lat\":53.1,\"lon\":-2.1},{\"lat\":53.2,\"lon\":-2.2}]", jsonString);
     }
 }
