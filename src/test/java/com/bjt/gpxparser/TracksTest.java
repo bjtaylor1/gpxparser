@@ -38,8 +38,8 @@ public class TracksTest extends TestCase
      */
     public void testPlains() throws Exception {
         final InputStream inputStream = getClass().getResourceAsStream("/300plains-trax.gpx.xml");
-        final GpxParser gpxparser = new GpxParser();
-        final Gpx plainsGpx = gpxparser.parseGpx(inputStream);
+        final GeoFileParser gpxparser = new GeoFileParser();
+        final GeoFile plainsGpx = gpxparser.parseGpx(inputStream);
         assertEquals(7, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
@@ -64,16 +64,16 @@ public class TracksTest extends TestCase
     public void testSimple() throws Exception {
         final InputStream inputStream = getClass().getResourceAsStream("/simple.gpx.xml");
 
-        final GpxParser gpxparser = new GpxParser();
-        final Gpx simpleGpx = gpxparser.parseGpx(inputStream);
+        final GeoFileParser gpxparser = new GeoFileParser();
+        final GeoFile simpleGpx = gpxparser.parseGpx(inputStream);
 
         assertEquals(2, simpleGpx.getTracks().size());
     }
 
     public void testParseTrackFromJson() throws IOException {
         final InputStream jsonStream = getClass().getResourceAsStream("/trackpoints.json");
-        final GpxParser gpxParser = new GpxParser();
-        final TrackPoint[] trackPoints = gpxParser.parseTrackpointsFromJson(jsonStream);
+        final GeoFileParser geoFileParser = new GeoFileParser();
+        final GpxTrackPoint[] trackPoints = geoFileParser.parseTrackpointsFromJson(jsonStream);
 
         assertEquals(3, trackPoints.length);
 
@@ -89,12 +89,12 @@ public class TracksTest extends TestCase
     }
 
     public void testParseTrackToJson() {
-        final List<TrackPoint> trackPoints = new ArrayList<TrackPoint>();
-        trackPoints.add(new TrackPoint(53.1, -2.1));
-        trackPoints.add(new TrackPoint(53.2, -2.2));
-        final GpxParser gpxParser = new GpxParser();
+        final List<GpxTrackPoint> trackPoints = new ArrayList<GpxTrackPoint>();
+        trackPoints.add(new GpxTrackPoint(53.1, -2.1));
+        trackPoints.add(new GpxTrackPoint(53.2, -2.2));
+        final GeoFileParser geoFileParser = new GeoFileParser();
         final StringWriter stringWriter = new StringWriter();
-        gpxParser.toJson(trackPoints, stringWriter);
+        geoFileParser.toJson(trackPoints, stringWriter);
         final String jsonString = stringWriter.toString();
         assertEquals("[{\"lat\":53.1,\"lon\":-2.1},{\"lat\":53.2,\"lon\":-2.2}]", jsonString);
     }

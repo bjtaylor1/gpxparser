@@ -1,59 +1,20 @@
 package com.bjt.gpxparser;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-
 /**
- * Created by Ben.Taylor on 16/04/2015.
+ * Created by Ben.Taylor on 04/03/2016.
  */
-@Root(strict = false)
-public class TrackPoint {
-    public TrackPoint(double lat, double lon) {
-        this.lat = lat;
-        this.lon = lon;
-    }
-    public TrackPoint() {
+public interface TrackPoint {
+    double getLat();
 
-    }
+    double getLon();
 
-    @Attribute
-    private double  lat;
+    String getTime();
 
-    @Attribute
-    private double lon;
+    String getName();
 
-    @Element(name = "time", required = false)
-    private String time;
+    void setName(String name);
 
-    public double getLat() {
-        return lat;
-    }
+    String getCmt();
 
-    public double getLon() {
-        return lon;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    private String name;
-    private String cmt;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCmt() {
-        return cmt;
-    }
-
-    public void setCmt(String cmt) {
-        this.cmt = cmt;
-    }
+    void setCmt(String cmt);
 }

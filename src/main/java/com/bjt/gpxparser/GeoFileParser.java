@@ -13,26 +13,27 @@ import java.util.List;
  * Hello world!
  *
  */
-public class GpxParser {
+public class GeoFileParser {
     private final Persister persister;
     private final Gson gson;
 
-    public GpxParser() {
+    public GeoFileParser() {
         persister = new Persister();
         final GsonBuilder gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
-
-    }
-    public Gpx parseGpx(final InputStream inputStream) throws Exception {
-        return persister.read(Gpx.class, inputStream);
     }
 
-    public TrackPoint[] parseTrackpointsFromJson(InputStream inputStream) throws IOException {
+    public GeoFile parseGpx(final InputStream inputStream) throws Exception {
+        final Gpx gpx = persister.read(Gpx.class, inputStream);
+        return gpx;
+    }
+
+    public GpxTrackPoint[] parseTrackpointsFromJson(InputStream inputStream) throws IOException {
         final String jsonString = IOUtils.toString(inputStream);
-        return gson.fromJson(jsonString, TrackPoint[].class);
+        return gson.fromJson(jsonString, GpxTrackPoint[].class);
     }
 
-    public void toJson(List<TrackPoint> trackPoints, Appendable writer) {
-        gson.toJson(trackPoints.toArray(new TrackPoint[] {}), writer);
+    public void toJson(List<GpxTrackPoint> trackPoints, Appendable writer) {
+        gson.toJson(trackPoints.toArray(new GpxTrackPoint[] {}), writer);
     }
 }

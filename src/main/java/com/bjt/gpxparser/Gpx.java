@@ -9,13 +9,14 @@ import java.util.List;
  * Created by Ben.Taylor on 16/04/2015.
  */
 @Root(name = "gpx", strict = false)
-public class Gpx {
+public class Gpx implements GeoFile {
 
-    @ElementList(entry = "trk", type = Track.class, inline = true)
+    @ElementList(entry = "trk", type = GpxTrack.class, inline = true)
     private List<Track> tracks;
 
 
 
+    @Override
     public List<Track> getTracks() {
         return tracks;
     }
