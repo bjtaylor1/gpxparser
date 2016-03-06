@@ -23,9 +23,14 @@ public class GeoFileParser {
         gson = gsonBuilder.create();
     }
 
-    public GeoFile parseGpx(final InputStream inputStream) throws Exception {
-        final Gpx gpx = persister.read(Gpx.class, inputStream);
-        return gpx;
+    public GeoFile parseGpx(final InputStream inputStream, String fileType) throws Exception {
+        GeoFile returnValue;
+        if("tcx".equalsIgnoreCase(fileType)) {
+            returnValue = persister.read(Tcx.class, inputStream);
+        } else {
+            returnValue = persister.read(Gpx.class, inputStream);
+        }
+        return returnValue;
     }
 
     public GpxTrackPoint[] parseTrackpointsFromJson(InputStream inputStream) throws IOException {

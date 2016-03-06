@@ -36,10 +36,10 @@ public class TracksTest extends TestCase
     /**
      * Rigourous Test :-)
      */
-    public void testPlains() throws Exception {
+    public void testPlainsGpx() throws Exception {
         final InputStream inputStream = getClass().getResourceAsStream("/300plains-trax.gpx.xml");
         final GeoFileParser gpxparser = new GeoFileParser();
-        final GeoFile plainsGpx = gpxparser.parseGpx(inputStream);
+        final GeoFile plainsGpx = gpxparser.parseGpx(inputStream, "gpx");
         assertEquals(7, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
@@ -61,11 +61,34 @@ public class TracksTest extends TestCase
         }
     }
 
+    public void testPlainsTcx() throws Exception {
+        final InputStream inputStream = getClass().getResourceAsStream("/300plains-trax.tcx.xml");
+        final GeoFileParser gpxparser = new GeoFileParser();
+        final GeoFile plainsGpx = gpxparser.parseGpx(inputStream, "tcx");
+        assertEquals(7, plainsGpx.getTracks().size());
+
+        for(final Track track : plainsGpx.getTracks()) {
+
+            assertTrue(track.getTrackSegments().size() > 0);
+
+            for(final TrackSegment trackSegment : track.getTrackSegments()) {
+
+                assertTrue(trackSegment.getTrackPoints().size() > 0);
+                for (final TrackPoint trackPoint : trackSegment.getTrackPoints()) {
+                    assertTrue(trackPoint.getLat() > 49);
+                    assertTrue(trackPoint.getLat() < 55);
+                    assertTrue(trackPoint.getLon() < -1);
+                    assertTrue(trackPoint.getLon() > -4);
+                }
+            }
+        }
+    }
+
     public void testSimple() throws Exception {
         final InputStream inputStream = getClass().getResourceAsStream("/simple.gpx.xml");
 
         final GeoFileParser gpxparser = new GeoFileParser();
-        final GeoFile simpleGpx = gpxparser.parseGpx(inputStream);
+        final GeoFile simpleGpx = gpxparser.parseGpx(inputStream, "gpx");
 
         assertEquals(2, simpleGpx.getTracks().size());
     }

@@ -21,4 +21,3 @@ public class Gpx implements GeoFile {
         return tracks;
     }
 }
-
