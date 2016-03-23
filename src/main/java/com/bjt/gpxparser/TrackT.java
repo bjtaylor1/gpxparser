@@ -9,6 +9,7 @@
 package com.bjt.gpxparser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Track_t", propOrder = {
     "trackpoint"
 })
-public class TrackT {
+public class TrackT implements Track, TrackSegment {
 
     @XmlElement(name = "Trackpoint", required = true)
     protected List<TrackpointT> trackpoint;
@@ -73,4 +74,18 @@ public class TrackT {
         return this.trackpoint;
     }
 
+    @Override
+    public List<TrackSegment> getTrackSegments() {
+        return Arrays.asList(this);
+    }
+
+    @Override
+    public String getName() {
+        return "TRACK";
+    }
+
+    @Override
+    public List<? extends TrackPoint> getTrackPoints() {
+        return getTrackpoint();
+    }
 }

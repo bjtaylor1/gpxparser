@@ -51,9 +51,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "heartRateBpm",
     "cadence",
     "sensorState",
-    "extensions"
+    "extensions",
+    "name", "cmt"
 })
-public class TrackpointT {
+public class TrackpointT implements TrackPoint {
 
     @XmlElement(name = "Time", required = true)
     @XmlSchemaType(name = "dateTime")
@@ -75,6 +76,18 @@ public class TrackpointT {
     @XmlElement(name = "Extensions")
     protected ExtensionsT extensions;
 
+    private String name;
+
+    @Override
+    public double getLat() {
+        return getPosition().getLatitudeDegrees();
+    }
+
+    @Override
+    public double getLon() {
+        return getPosition().getLongitudeDegrees();
+    }
+
     /**
      * Gets the value of the time property.
      * 
@@ -83,8 +96,29 @@ public class TrackpointT {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getTime() {
-        return time;
+    public String getTime() {
+        return time.toXMLFormat();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String cmt = "";
+    @Override
+    public String getCmt() {
+        return cmt;
+    }
+
+    @Override
+    public void setCmt(String cmt) {
+        this.cmt = cmt;
     }
 
     /**

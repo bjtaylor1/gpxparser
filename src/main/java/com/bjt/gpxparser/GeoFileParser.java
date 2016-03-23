@@ -41,10 +41,11 @@ public class GeoFileParser {
     private GeoFile readTcx(final InputStream inputStream) throws JAXBException {
         final JAXBContext jaxbContext = JAXBContext.newInstance(TrainingCenterDatabaseT.class);
         final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        JAXBElement<TrainingCenterDatabaseT> unmarshal = (JAXBElement<TrainingCenterDatabaseT>) jaxbUnmarshaller.unmarshal(inputStream);
+        final JAXBElement<TrainingCenterDatabaseT> unmarshal = (JAXBElement<TrainingCenterDatabaseT>) jaxbUnmarshaller.unmarshal(inputStream);
         final TrainingCenterDatabaseT value = unmarshal.getValue();
 
-        return null;
+        return value;
+
     }
 
     public GpxTrackPoint[] parseTrackpointsFromJson(InputStream inputStream) throws IOException {

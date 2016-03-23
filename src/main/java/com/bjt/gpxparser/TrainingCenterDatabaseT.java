@@ -9,6 +9,8 @@
 package com.bjt.gpxparser;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -45,7 +47,7 @@ import javax.xml.bind.annotation.*;
     "author",
     "extensions"
 })
-public class TrainingCenterDatabaseT {
+public class TrainingCenterDatabaseT implements GeoFile {
 
     @XmlElement(name = "Folders")
     protected FoldersT folders;
@@ -204,4 +206,17 @@ public class TrainingCenterDatabaseT {
         this.extensions = value;
     }
 
+    @Override
+    public List<Track> getTracks() {
+        final ArrayList<Track> tracks = new ArrayList<>();
+        for(final ActivityT activity : this.getActivities().getActivity()) {
+            for(final ActivityLapT lap : activity.getLap()) {
+                tracks.addAll(lap.getTrack());
+            }
+        }
+        for(final CourseT course : this.getCourses().getCourse()) {
+            tracks.addAll(course.getTrack());
+        }
+        return tracks;
+    }
 }

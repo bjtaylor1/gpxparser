@@ -6,5 +6,5 @@ import java.util.List;
  * Created by Ben.Taylor on 04/03/2016.
  */
 public interface TrackSegment {
-    List<TrackPoint> getTrackPoints();
+    List<? extends TrackPoint> getTrackPoints();
 }
