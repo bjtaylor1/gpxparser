@@ -3,6 +3,7 @@ package com.bjt.gpxparser;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 @Root(strict = false)
 public class TcxCourses {
     @ElementList(entry = "Course", type = TcxCourse.class, inline = true)
-    private List<TcxCourse> courses;
+    private List<TcxCourse> courses = new ArrayList<>();
 
     public List<TcxCourse> getCourses() {
         return courses;

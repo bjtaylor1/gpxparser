@@ -8,6 +8,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class TcxTrack implements Track {
     private String name;
 
     @ElementList(entry = "Trackpoint", type = TcxTrackPoint.class, inline = true)
-    private List<TrackPoint> trackPoints;
+    private List<TrackPoint> trackPoints = new ArrayList<>();
 
     @Override
     public List<TrackSegment> getTrackSegments() {

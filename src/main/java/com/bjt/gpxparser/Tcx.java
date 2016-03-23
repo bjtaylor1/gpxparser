@@ -13,14 +13,22 @@ import java.util.List;
 @Root(name = "TrainingCentreDatabase", strict = false)
 public class Tcx implements GeoFile {
 
-    @Element(name = "Courses")
-    private TcxCourses courses;
+    @Element(name = "Courses", required = false)
+    private TcxCourses courses = new TcxCourses();
+
+    @Element(name = "Activities", required = false)
+    private TcxActivities activities = new TcxActivities();
 
     @Override
     public List<Track> getTracks() {
         final List<Track> tracks = new ArrayList<>();
-        for(final TcxCourse course : courses.getCourses()) {
+        for (final TcxCourse course : courses.getCourses()) {
             tracks.addAll(course.getTracks());
+        }
+        for(final TcxActivity activity : activities.getActivities()) {
+            for(final TcxLap lap : activity.getLaps()) {
+                tracks.addAll(lap.getTracks());
+            }
         }
         return tracks;
     }

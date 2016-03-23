@@ -4,6 +4,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
 @Root(strict = false)
 public class TcxCourse {
     @ElementList(entry = "Track", type = TcxTrack.class, inline = true)
-    private List<Track> tracks;
+    private List<Track> tracks = new ArrayList<>();
 
     @Element(name = "Name")
     private String name;
