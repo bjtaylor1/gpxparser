@@ -2,7 +2,6 @@ package com.bjt.gpxparser;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl;
 import org.apache.commons.io.IOUtils;
 import org.simpleframework.xml.core.Persister;
 

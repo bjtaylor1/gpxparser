@@ -38,12 +38,15 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Track_t", propOrder = {
-    "trackpoint"
+    "trackpoint",
+    "name"
 })
 public class TrackT implements Track, TrackSegment {
 
     @XmlElement(name = "Trackpoint", required = true)
     protected List<TrackpointT> trackpoint;
+
+    private String name;
 
     /**
      * Gets the value of the trackpoint property.
@@ -81,7 +84,11 @@ public class TrackT implements Track, TrackSegment {
 
     @Override
     public String getName() {
-        return "TRACK";
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

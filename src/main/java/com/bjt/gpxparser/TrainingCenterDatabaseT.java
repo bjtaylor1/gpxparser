@@ -207,8 +207,8 @@ public class TrainingCenterDatabaseT implements GeoFile {
     }
 
     @Override
-    public List<Track> getTracks() {
-        final ArrayList<Track> tracks = new ArrayList<>();
+    public List<? extends Track> getTracks() {
+        final ArrayList<TrackT> tracks = new ArrayList<>();
         for(final ActivityT activity : this.getActivities().getActivity()) {
             for(final ActivityLapT lap : activity.getLap()) {
                 tracks.addAll(lap.getTrack());
@@ -216,6 +216,13 @@ public class TrainingCenterDatabaseT implements GeoFile {
         }
         for(final CourseT course : this.getCourses().getCourse()) {
             tracks.addAll(course.getTrack());
+        }
+        final Integer trackCount = tracks.size();
+        final String format = "%0"  + trackCount.toString().length() + "d";
+        int i = 1;
+        for(final TrackT track : tracks) {
+            final String name = String.format("TRACK" + format, i++);
+            track.setName(name);
         }
         return tracks;
     }

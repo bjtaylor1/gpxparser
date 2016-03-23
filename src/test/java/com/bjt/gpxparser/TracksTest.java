@@ -112,7 +112,7 @@ public class TracksTest extends TestCase
         final GeoFileParser gpxparser = new GeoFileParser();
         final GeoFile plainsGpx = gpxparser.parseGpx(inputStream, "tcx");
         assertEquals(1, plainsGpx.getTracks().size());
-
+        assertEquals("TRACK1", plainsGpx.getTracks().get(0).getName());
         for(final Track track : plainsGpx.getTracks()) {
 
             assertTrue(track.getTrackSegments().size() > 0);
