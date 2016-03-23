@@ -88,7 +88,7 @@ public class TracksTest extends TestCase
         final InputStream inputStream = getClass().getResourceAsStream("/Sample1.tcx");
         final GeoFileParser gpxparser = new GeoFileParser();
         final GeoFile plainsGpx = gpxparser.parseGpx(inputStream, "tcx");
-        assertEquals(7, plainsGpx.getTracks().size());
+        assertEquals(1, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
 
@@ -99,7 +99,7 @@ public class TracksTest extends TestCase
                 assertTrue(trackSegment.getTrackPoints().size() > 0);
                 for (final TrackPoint trackPoint : trackSegment.getTrackPoints()) {
                     assertTrue(trackPoint.getLat() > 49);
-                    assertTrue(trackPoint.getLat() < 55);
+                    assertTrue(trackPoint.getLat() < 59);
                     assertTrue(trackPoint.getLon() < -1);
                     assertTrue(trackPoint.getLon() > -4);
                 }
@@ -111,7 +111,7 @@ public class TracksTest extends TestCase
         final InputStream inputStream = getClass().getResourceAsStream("/Sample2.tcx");
         final GeoFileParser gpxparser = new GeoFileParser();
         final GeoFile plainsGpx = gpxparser.parseGpx(inputStream, "tcx");
-        assertEquals(7, plainsGpx.getTracks().size());
+        assertEquals(1, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
 
@@ -122,7 +122,7 @@ public class TracksTest extends TestCase
                 assertTrue(trackSegment.getTrackPoints().size() > 0);
                 for (final TrackPoint trackPoint : trackSegment.getTrackPoints()) {
                     assertTrue(trackPoint.getLat() > 49);
-                    assertTrue(trackPoint.getLat() < 55);
+                    assertTrue(trackPoint.getLat() < 59);
                     assertTrue(trackPoint.getLon() < -1);
                     assertTrue(trackPoint.getLon() > -4);
                 }

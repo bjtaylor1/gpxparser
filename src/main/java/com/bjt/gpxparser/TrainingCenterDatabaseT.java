@@ -52,11 +52,11 @@ public class TrainingCenterDatabaseT implements GeoFile {
     @XmlElement(name = "Folders")
     protected FoldersT folders;
     @XmlElement(name = "Activities")
-    protected ActivityListT activities;
+    protected ActivityListT activities = new ActivityListT();
     @XmlElement(name = "Workouts")
     protected WorkoutListT workouts;
     @XmlElement(name = "Courses")
-    protected CourseListT courses;
+    protected CourseListT courses = new CourseListT();
     @XmlElement(name = "Author")
     protected AbstractSourceT author;
     @XmlElement(name = "Extensions")

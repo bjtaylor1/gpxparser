@@ -80,7 +80,8 @@ public class TrackpointT implements TrackPoint {
 
     @Override
     public double getLat() {
-        return getPosition().getLatitudeDegrees();
+        final PositionT position = getPosition();
+        return position.getLatitudeDegrees();
     }
 
     @Override

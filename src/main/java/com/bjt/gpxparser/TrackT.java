@@ -86,6 +86,12 @@ public class TrackT implements Track, TrackSegment {
 
     @Override
     public List<? extends TrackPoint> getTrackPoints() {
-        return getTrackpoint();
+        final List<TrackpointT> trackpoints = new ArrayList<>();
+        for(final TrackpointT trackpointT : getTrackpoint()) {
+            if(trackpointT.getPosition() != null) {
+                trackpoints.add(trackpointT);
+            }
+        }
+        return trackpoints;
     }
 }
