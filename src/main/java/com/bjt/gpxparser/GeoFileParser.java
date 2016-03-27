@@ -27,7 +27,7 @@ public class GeoFileParser {
         gson = gsonBuilder.create();
     }
 
-    public GeoFile parseGpx(final InputStream inputStream, String fileName) throws Exception {
+    public GeoFile parseGeoFile(final InputStream inputStream, String fileName) throws Exception {
         GeoFile returnValue;
         if(fileName.toLowerCase().endsWith("tcx")) {
             returnValue = readTcx(inputStream);
