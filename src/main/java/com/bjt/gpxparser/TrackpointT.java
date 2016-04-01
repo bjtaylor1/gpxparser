@@ -98,7 +98,7 @@ public class TrackpointT implements TrackPoint {
      *     
      */
     public String getTime() {
-        return time.toXMLFormat();
+        return time == null ? null : time.toXMLFormat();
     }
 
     @Override
@@ -120,6 +120,11 @@ public class TrackpointT implements TrackPoint {
     @Override
     public void setCmt(String cmt) {
         this.cmt = cmt;
+    }
+
+    @Override
+    public Double getElevation() {
+        return getAltitudeMeters();
     }
 
     /**

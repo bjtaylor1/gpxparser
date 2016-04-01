@@ -33,9 +33,7 @@ public class TracksTest extends TestCase
         return new TestSuite( TracksTest.class );
     }
 
-    /**
-     * Rigourous Test :-)
-     */
+
     public void testPlainsGpx() throws Exception {
         final InputStream inputStream = getClass().getResourceAsStream("/300plains-trax.gpx.xml");
         final GeoFileParser gpxparser = new GeoFileParser();

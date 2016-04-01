@@ -26,6 +26,9 @@ public class GpxTrackPoint implements TrackPoint {
     @Element(name = "time", required = false)
     private String time;
 
+    @Element(name = "ele", required = false)
+    private Double elevation;
+
     @Override
     public double getLat() {
         return lat;
@@ -62,5 +65,9 @@ public class GpxTrackPoint implements TrackPoint {
     @Override
     public void setCmt(String cmt) {
         this.cmt = cmt;
+    }
+
+    public Double getElevation() {
+        return elevation;
     }
 }

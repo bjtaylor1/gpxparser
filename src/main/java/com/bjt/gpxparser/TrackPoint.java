@@ -17,4 +17,6 @@ public interface TrackPoint {
     String getCmt();
 
     void setCmt(String cmt);
+
+    Double getElevation();
 }
