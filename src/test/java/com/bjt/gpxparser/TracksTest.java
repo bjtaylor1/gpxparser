@@ -35,9 +35,8 @@ public class TracksTest extends TestCase
 
 
     public void testPlainsGpx() throws Exception {
-        final InputStream inputStream = getClass().getResourceAsStream("/300plains-trax.gpx.xml");
-        final GeoFileParser gpxparser = new GeoFileParser();
-        final GeoFile plainsGpx = gpxparser.parseGeoFile(inputStream, "/300plains-trax.gpx");
+        final String name = "/300plains-trax.gpx";
+        final GeoFile plainsGpx = getGeoFile(name);
         assertEquals(7, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
@@ -60,9 +59,8 @@ public class TracksTest extends TestCase
     }
 
     public void testPlainsTcx() throws Exception {
-        final InputStream inputStream = getClass().getResourceAsStream("/300plains-trax.tcx.xml");
-        final GeoFileParser gpxparser = new GeoFileParser();
-        final GeoFile plainsGpx = gpxparser.parseGeoFile(inputStream, "/300plains-trax.tcx");
+        final String name = "/300plains-trax.tcx";
+        final GeoFile plainsGpx = getGeoFile(name);
         assertEquals(7, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
@@ -83,9 +81,8 @@ public class TracksTest extends TestCase
     }
 
     public void testSample1Tcx() throws Exception {
-        final InputStream inputStream = getClass().getResourceAsStream("/Sample1.tcx");
-        final GeoFileParser gpxparser = new GeoFileParser();
-        final GeoFile plainsGpx = gpxparser.parseGeoFile(inputStream, "/Sample1.tcx");
+        final String name = "/Sample1.tcx";
+        final GeoFile plainsGpx = getGeoFile(name);
         assertEquals(1, plainsGpx.getTracks().size());
 
         for(final Track track : plainsGpx.getTracks()) {
@@ -106,9 +103,8 @@ public class TracksTest extends TestCase
     }
 
     public void testSample2Tcx() throws Exception {
-        final InputStream inputStream = getClass().getResourceAsStream("/Sample2.tcx");
-        final GeoFileParser gpxparser = new GeoFileParser();
-        final GeoFile plainsGpx = gpxparser.parseGeoFile(inputStream, "/Sample2.TCX");
+        final String name = "/Sample2.tcx";
+        final GeoFile plainsGpx = getGeoFile(name);
         assertEquals(1, plainsGpx.getTracks().size());
         assertEquals("TRACK1", plainsGpx.getTracks().get(0).getName());
         for(final Track track : plainsGpx.getTracks()) {
@@ -136,13 +132,12 @@ public class TracksTest extends TestCase
     }
 
     public void testFiles() throws Exception {
-        final GeoFile geoFile1 = getGeoFile("/Acceptable.gpx");
-        final GeoFile geoFile2 = getGeoFile("/Intended.gpx");
+        getGeoFile("/Acceptable.gpx");
+        getGeoFile("/Intended.gpx");
     }
 
     private GeoFile getGeoFile(String fileName) throws Exception {
         final InputStream inputStream = getClass().getResourceAsStream(fileName);
-
         final GeoFileParser gpxparser = new GeoFileParser();
         return gpxparser.parseGeoFile(inputStream, fileName);
     }

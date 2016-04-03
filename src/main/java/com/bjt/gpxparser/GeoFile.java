@@ -1,5 +1,6 @@
 package com.bjt.gpxparser;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -7,4 +8,8 @@ import java.util.List;
  */
 public interface GeoFile {
     List<? extends Track> getTracks();
+
+    void pruneTracks(final Collection<String> tracksToKeep);
+
+
 }

@@ -10,6 +10,7 @@ package com.bjt.gpxparser;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -206,9 +207,16 @@ public class TrainingCenterDatabaseT implements GeoFile {
         this.extensions = value;
     }
 
+    private ArrayList<TrackT> tracks;
     @Override
     public List<? extends Track> getTracks() {
-        final ArrayList<TrackT> tracks = new ArrayList<>();
+        if(tracks == null) {
+            setTracks();
+        }
+        return tracks;
+    }
+
+    private void setTracks() {
         for(final ActivityT activity : this.getActivities().getActivity()) {
             for(final ActivityLapT lap : activity.getLap()) {
                 tracks.addAll(lap.getTrack());
@@ -224,6 +232,13 @@ public class TrainingCenterDatabaseT implements GeoFile {
             final String name = String.format("TRACK" + format, i++);
             track.setName(name);
         }
-        return tracks;
+    }
+
+    @Override
+    public void pruneTracks(final Collection<String> tracksToKeep) {
+        if(tracks == null) {
+            setTracks();
+        }
+        tracks.removeIf(trackT -> !tracksToKeep.contains(trackT.getName()));
     }
 }
