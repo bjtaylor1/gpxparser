@@ -16,9 +16,9 @@ import java.util.List;
 
 /**
  * <p>Java class for TrainingCenterDatabase_t complex type.
- * 
+ * <p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="TrainingCenterDatabase_t">
  *   &lt;complexContent>
@@ -35,18 +35,17 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TrainingCenterDatabase_t", propOrder = {
-    "folders",
-    "activities",
-    "workouts",
-    "courses",
-    "author",
-    "extensions"
+        "folders",
+        "activities",
+        "workouts",
+        "courses",
+        "author",
+        "extensions",
+        "tracks"
 })
 public class TrainingCenterDatabaseT implements GeoFile {
 
@@ -65,11 +64,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Gets the value of the folders property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FoldersT }
-     *     
+     *
+     * @return possible object is
+     * {@link FoldersT }
      */
     public FoldersT getFolders() {
         return folders;
@@ -77,11 +74,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Sets the value of the folders property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FoldersT }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link FoldersT }
      */
     public void setFolders(FoldersT value) {
         this.folders = value;
@@ -89,11 +84,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Gets the value of the activities property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ActivityListT }
-     *     
+     *
+     * @return possible object is
+     * {@link ActivityListT }
      */
     public ActivityListT getActivities() {
         return activities;
@@ -101,11 +94,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Sets the value of the activities property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ActivityListT }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ActivityListT }
      */
     public void setActivities(ActivityListT value) {
         this.activities = value;
@@ -113,11 +104,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Gets the value of the workouts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link WorkoutListT }
-     *     
+     *
+     * @return possible object is
+     * {@link WorkoutListT }
      */
     public WorkoutListT getWorkouts() {
         return workouts;
@@ -125,11 +114,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Sets the value of the workouts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link WorkoutListT }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link WorkoutListT }
      */
     public void setWorkouts(WorkoutListT value) {
         this.workouts = value;
@@ -137,11 +124,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Gets the value of the courses property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CourseListT }
-     *     
+     *
+     * @return possible object is
+     * {@link CourseListT }
      */
     public CourseListT getCourses() {
         return courses;
@@ -149,11 +134,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Sets the value of the courses property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CourseListT }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CourseListT }
      */
     public void setCourses(CourseListT value) {
         this.courses = value;
@@ -161,11 +144,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Gets the value of the author property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AbstractSourceT }
-     *     
+     *
+     * @return possible object is
+     * {@link AbstractSourceT }
      */
     public AbstractSourceT getAuthor() {
         return author;
@@ -173,11 +154,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Sets the value of the author property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AbstractSourceT }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AbstractSourceT }
      */
     public void setAuthor(AbstractSourceT value) {
         this.author = value;
@@ -185,11 +164,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Gets the value of the extensions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ExtensionsT }
-     *     
+     *
+     * @return possible object is
+     * {@link ExtensionsT }
      */
     public ExtensionsT getExtensions() {
         return extensions;
@@ -197,48 +174,46 @@ public class TrainingCenterDatabaseT implements GeoFile {
 
     /**
      * Sets the value of the extensions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ExtensionsT }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ExtensionsT }
      */
     public void setExtensions(ExtensionsT value) {
         this.extensions = value;
     }
 
     private ArrayList<TrackT> tracks;
+
     @Override
     public List<? extends Track> getTracks() {
-        if(tracks == null) {
-            setTracks();
-        }
+        setTracks();
         return tracks;
     }
 
     private void setTracks() {
-        for(final ActivityT activity : this.getActivities().getActivity()) {
-            for(final ActivityLapT lap : activity.getLap()) {
-                tracks.addAll(lap.getTrack());
+        if (tracks == null) {
+            tracks = new ArrayList<>();
+            for (final ActivityT activity : this.getActivities().getActivity()) {
+                for (final ActivityLapT lap : activity.getLap()) {
+                    tracks.addAll(lap.getTrack());
+                }
             }
-        }
-        for(final CourseT course : this.getCourses().getCourse()) {
-            tracks.addAll(course.getTrack());
-        }
-        final Integer trackCount = tracks.size();
-        final String format = "%0"  + trackCount.toString().length() + "d";
-        int i = 1;
-        for(final TrackT track : tracks) {
-            final String name = String.format("TRACK" + format, i++);
-            track.setName(name);
+            for (final CourseT course : this.getCourses().getCourse()) {
+                tracks.addAll(course.getTrack());
+            }
+            final Integer trackCount = tracks.size();
+            final String format = "%0" + trackCount.toString().length() + "d";
+            int i = 1;
+            for (final TrackT track : tracks) {
+                final String name = String.format("TRACK" + format, i++);
+                track.setName(name);
+            }
         }
     }
 
     @Override
     public void pruneTracks(final Collection<String> tracksToKeep) {
-        if(tracks == null) {
-            setTracks();
-        }
+        setTracks();
         tracks.removeIf(trackT -> !tracksToKeep.contains(trackT.getName()));
     }
 }

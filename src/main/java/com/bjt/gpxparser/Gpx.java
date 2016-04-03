@@ -5,6 +5,7 @@ import org.simpleframework.xml.Root;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by Ben.Taylor on 16/04/2015.
