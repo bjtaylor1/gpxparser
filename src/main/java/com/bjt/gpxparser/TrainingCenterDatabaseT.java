@@ -62,6 +62,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
     @XmlElement(name = "Extensions")
     protected ExtensionsT extensions;
 
+    @XmlTransient
+    private ArrayList<TrackT> originalTracks;
+
     /**
      * Gets the value of the folders property.
      *
@@ -212,8 +215,13 @@ public class TrainingCenterDatabaseT implements GeoFile {
     }
 
     @Override
-    public void pruneTracks(final Collection<String> tracksToKeep) {
+    public void pruneTracks(final Collection<String> trackNamesToKeep) {
         setTracks();
-        tracks.removeIf(trackT -> !tracksToKeep.contains(trackT.getName()));
+        if (originalTracks == null) {
+            originalTracks = new ArrayList<>(tracks);
+        } else {
+            tracks = new ArrayList<>(originalTracks);
+        }
+        tracks.removeIf(track -> !trackNamesToKeep.contains(track.getName()));
     }
 }
