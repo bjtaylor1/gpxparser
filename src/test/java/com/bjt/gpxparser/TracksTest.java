@@ -33,6 +33,11 @@ public class TracksTest extends TestCase
         return new TestSuite( TracksTest.class );
     }
 
+    public void testCreator() throws Exception {
+        final String name = "/300plains-trax.gpx";
+        final GeoFile plainsGpx = getGeoFile(name);
+        assertEquals("MapSource 6.13.7", plainsGpx.getCreator());
+    }
 
     public void testPlainsGpx() throws Exception {
         final String name = "/300plains-trax.gpx";

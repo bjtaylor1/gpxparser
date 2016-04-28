@@ -11,5 +11,5 @@ public interface GeoFile {
 
     void pruneTracks(final Collection<String> tracksToKeep);
 
-
+    String getCreator();
 }

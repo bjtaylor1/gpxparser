@@ -224,4 +224,9 @@ public class TrainingCenterDatabaseT implements GeoFile {
         }
         tracks.removeIf(track -> !trackNamesToKeep.contains(track.getName()));
     }
+
+    @Override
+    public String getCreator() {
+        return "(unavailable for TCX)";
+    }
 }

@@ -1,5 +1,6 @@
 package com.bjt.gpxparser;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -14,6 +15,14 @@ import java.util.stream.Stream;
  */
 @Root(name = "gpx", strict = false)
 public class Gpx implements GeoFile {
+
+    @Override
+    public String getCreator() {
+        return creator;
+    }
+
+    @Attribute(name = "creator", required = false)
+    private String creator;
 
     @ElementList(entry = "trk", type = GpxTrack.class, inline = true)
     private List<Track> tracks;
