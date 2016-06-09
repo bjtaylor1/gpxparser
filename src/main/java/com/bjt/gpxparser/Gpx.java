@@ -22,6 +22,10 @@ public class Gpx implements GeoFile {
         return creator;
     }
 
+    public void setCreator(final String creator) {
+        this.creator = creator;
+    }
+
     @Attribute(name = "creator", required = false)
     private String creator;
 
@@ -49,10 +53,13 @@ public class Gpx implements GeoFile {
 
     public static GeoFile combineTracks(final GeoFile... sourceGpxs) {
         final List<Track> allTracks = new ArrayList<>();
+        String creator = null;
         for(final GeoFile gpx : sourceGpxs) {
             allTracks.addAll(gpx.getTracks());
+            if(creator == null) creator = gpx.getCreator();
         }
         final Gpx gpx = new Gpx(allTracks);
+        gpx.setCreator(creator);
         return gpx;
     }
 
