@@ -23,6 +23,10 @@ public class GpxTrackPoint implements TrackPoint {
     @Attribute
     private double lon;
 
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     @Element(name = "time", required = false)
     private String time;
 

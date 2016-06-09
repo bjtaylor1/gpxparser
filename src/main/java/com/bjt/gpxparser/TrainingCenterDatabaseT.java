@@ -222,7 +222,11 @@ public class TrainingCenterDatabaseT implements GeoFile {
         } else {
             tracks = new ArrayList<>(originalTracks);
         }
-        tracks.removeIf(track -> !trackNamesToKeep.contains(track.getName()));
+        for(int i = tracks.size() - 1; i >= 0; i--) {
+            if(!trackNamesToKeep.contains(tracks.get(i).getName())) {
+                tracks.remove(i);
+            }
+        }
     }
 
     @Override

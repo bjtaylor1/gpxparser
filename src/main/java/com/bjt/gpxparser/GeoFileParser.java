@@ -9,9 +9,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Hello world!
@@ -29,6 +33,18 @@ public class GeoFileParser {
 
     public GeoFile parseGeoFile(final InputStream inputStream, String fileName) throws Exception {
         GeoFile returnValue;
+        if(fileName.toLowerCase().endsWith(".zip")) {
+            final List<GeoFile> geoFiles = new ArrayList<>();
+            ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+
+                ZipEntry zipEntry;
+                while((zipEntry = zipInputStream.getNextEntry()) != null) {
+                    geoFiles.add(parseGeoFile(zipInputStream, zipEntry.getName()));
+                }
+
+            final GeoFile combinedGeoFile = Gpx.combineTracks(geoFiles.toArray(new GeoFile[]{}));
+            return combinedGeoFile;
+        }
         if(fileName.toLowerCase().endsWith("tcx")) {
             returnValue = readTcx(inputStream);
         } else {
@@ -40,7 +56,8 @@ public class GeoFileParser {
     private GeoFile readTcx(final InputStream inputStream) throws JAXBException {
         final JAXBContext jaxbContext = JAXBContext.newInstance(TrainingCenterDatabaseT.class);
         final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        final JAXBElement<TrainingCenterDatabaseT> unmarshal = (JAXBElement<TrainingCenterDatabaseT>) jaxbUnmarshaller.unmarshal(inputStream);
+        final FilterInputStream nonClosingInputStream = new NonClosingInputStream(inputStream);
+        final JAXBElement<TrainingCenterDatabaseT> unmarshal = (JAXBElement<TrainingCenterDatabaseT>) jaxbUnmarshaller.unmarshal(nonClosingInputStream);
         final TrainingCenterDatabaseT value = unmarshal.getValue();
 
         return value;

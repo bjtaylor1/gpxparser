@@ -11,10 +11,17 @@ import java.util.List;
 @Root(strict = false)
 public class GpxTrackSegment implements TrackSegment {
     @ElementList(entry = "trkpt", type = GpxTrackPoint.class, inline = true)
-    private List<TrackPoint> trackPoints;
+    private List<? extends TrackPoint> trackPoints;
+
+    public GpxTrackSegment() {
+    }
+
+    public GpxTrackSegment(final List<? extends TrackPoint> trackPoints) {
+        this.trackPoints = trackPoints;
+    }
 
     @Override
-    public List<TrackPoint> getTrackPoints() {
+    public List<? extends TrackPoint> getTrackPoints() {
         return trackPoints;
     }
 }

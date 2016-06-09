@@ -78,7 +78,7 @@ public class TrackT implements Track, TrackSegment {
     }
 
     @Override
-    public List<TrackSegment> getTrackSegments() {
+    public List<? extends TrackSegment> getTrackSegments() {
         return Arrays.asList(this);
     }
 
